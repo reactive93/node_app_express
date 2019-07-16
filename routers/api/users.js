@@ -6,7 +6,11 @@ const jsonwebtoken = require('jsonwebtoken');
 const config = require('config');
 
 const User = require('../../models/User');
-
+/**
+ * public
+ * post
+ * register new user
+ */
 router.post('/',[check("name","field is required").not().isEmpty(),
                 check("email","Invalid email").isEmail(),
                 check("password","Please input password 6 or more characters").isLength({min:6})
@@ -21,13 +25,12 @@ async (req, res)=>{
         res.status(400).json({errors:errors.array()});
     }
 
-    const {name,email,password} = req.body;
+    const {name, email, password} = req.body;
 
     try {
         let user = await User.findOne({email});
         if (user) {
             return res.status(400).json({errors:[{msg:"User already used"}]});
-            
         }
 
         const avatar = graravar.url(email, {
@@ -54,21 +57,21 @@ async (req, res)=>{
         };
 
         jsonwebtoken.sign(payload, config.get('secret'), {
-            expiresIn:36000
+            expiresIn:360000
         },
         (err, token)=>{
             if (err) {
                 throw err;
             }
             res.json({token});
-        })
-       
+        });
+
     }
     catch(err) {
         console.log(err.massage);
         res.status(500).send('Server error');
     }
-    
+
 });
 
 module.exports = router;
