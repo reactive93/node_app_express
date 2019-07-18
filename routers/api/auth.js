@@ -41,7 +41,7 @@ async (req, res)=>{
         }
         const payload = {
             user:{
-                id:new_user.id
+                id:user.id
             }
         };
 
