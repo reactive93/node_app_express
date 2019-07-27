@@ -10,7 +10,7 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 
-router.get('/', [auth, [check("text", "Text is required").not().isEmpty()]],
+router.post('/', [auth, [check("text", "Text is required").not().isEmpty()]],
     /**
      * @param {Request} req
      * @param {Response} res

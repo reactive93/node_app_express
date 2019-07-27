@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb://localhost:27017/myDB",
+    "secret":"this_is_secter_jwt"
+}
